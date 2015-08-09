@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="bloqueC">
+    <div class="container">
+        <div class="row">
+            <div>
+                <h2 class="section-heading" style="text-decoration: underline; color:green">{{post.titulo}}</h2>
+                <h5 class="section-heading">Posteado por {{post.autor}} -- {{post.fecha}}</h5>
+                <img class="image_wrapper fl_image" src="{{ MEDIA_URL }}/{{post.imagen}}" alt="imagen 1" width="300" height="230" href="base.html"/>
+                <p>{{post.contenido}} </p>
+            </div>
+        </div>
+    </div>
+    <a href="{% url 'app_blogh:home' %}" class="btn btn-primary" style="text-decoration: none; color:green;">Atras</a>
+</div>
+
+<div class="bloqueC" style="margin-top:450px">
+    <div class="coment">
+        <table border="0" style="margin: 0 auto;">
+            <tr>
+                <td>Nombre:</td>
+
+                <td><input id="name" name="nombre" type="text"/></td>
+            </tr
+
+            <tr>
+                <td>Comentario:</td>
+                <td><textarea id="message" rows="3" name="message">Escriba aquí su comentario</textarea></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><button id="botonEnviar" name="enviar">Enviar</button></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<div class="coment_column" id="comentarios">
+    {% include 'comentarios.html' %}
+</div>
+
+
+
+{% endblock %}{% block scripts %}
+<script src="{% static 'js/jquery-1.11.3.js' %}"></script>
+<script>
+    $("#botonEnviar").click(
+        function(){
+            var dataFSend={
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                id:'{{post.id}}',
+                nombre:$("#name").val(),
+                message:$("#message").val()
+            }
+
+
+            $.ajax({
+                type: "POST",
+                url: "{% url 'app_blogh:enviar_comentarios' %}",
+                data: dataFSend,
+                success: function(result){
+                    console.log("llega respuesta ok");
+                    $("#comentarios").html(result);
+                },
+                error: function(err){
+                    console.log("Paso algo malo...D:");
+                    console.log(err.responseText);
+                },
+            });
+        }); 
+</script>{% endblock %}
+

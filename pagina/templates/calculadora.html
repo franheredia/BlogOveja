@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="bloqueC">
+    <div>       
+        <h1>Calculadora</h1>
+        <div>
+            <input type="text" id="resultado" value="0" disabled=true/><input type="button"  onclick="press(this)" value="←" /><input type="button"  onclick="press(this)" value="CE" /><input type="button"  onclick="press(this)" value="C" />
+            <br><br>
+            <input type="button" class="buttonC" onclick="press(this)" value="1" />
+            <input type="button" class="buttonC" onclick="press(this)" value="2" />
+            <input type="button" class="buttonC" onclick="press(this)" value="3" />
+            <input type="button" class="buttonC" onclick="press(this)" value="+" />
+            <br>
+            <input type="button" class="buttonC" onclick="press(this)" value="4" />
+            <input type="button" class="buttonC" onclick="press(this)" value="5" />
+            <input type="button" class="buttonC" onclick="press(this)" value="6" />
+            <input type="button" class="buttonC" onclick="press(this)" value="-" />
+            <br>
+            <input type="button" class="buttonC" onclick="press(this)" value="7" />
+            <input type="button" class="buttonC" onclick="press(this)" value="8" />
+            <input type="button" class="buttonC" onclick="press(this)" value="9" />
+            <input type="button" class="buttonC" onclick="press(this)" value="*" />
+            <br>
+            <input type="button" class="buttonC" onclick="press(this)" value="." />
+            <input type="button" class="buttonC" onclick="press(this)" value="0" />
+            <input type="button" class="buttonC" onclick="press(this)" value="=" />
+            <input type="button" class="buttonC" onclick="press(this)" value="/" />
+            <br>
+        </div> 
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    var num="";
+    var casilla=document.getElementById("resultado");
+    var calculo="";
+    var resuelto;
+
+    function press(btn){
+        var presionado=btn.value;
+        var valor="";
+        var numero="";
+        if(presionado!="←" && presionado!="C" && presionado!="CE"){
+            if(!isNaN(presionado) || presionado=="."){
+                valor="numero";
+            }else if(presionado!="="){
+                valor="simbolo";
+            }else{valor="="}
+        }else{valor=presionado;}
+
+        switch(valor){
+            case "←":
+                var ultimo=num.length-1;
+                num=num.substring(0, ultimo);
+                if(num==""){num=0;}
+                casilla.setAttribute("value",num);
+                break;
+            case "CE":
+                num="0";
+                casilla.setAttribute("value", calculo + "?");
+                break;
+            case "C":
+                num="0";
+                calculo="0";
+                resuelto=false;
+                casilla.setAttribute("value","0");
+                break;
+            case "numero":
+                if(resuelto==true){
+                    num="";
+                    resuelto=false;}
+                if(num=="0"){num="";}
+                num+= presionado;
+                casilla.setAttribute("value",num);
+                break;
+            case "simbolo":
+                calculo+=num;
+                casilla.setAttribute("value",eval(calculo));
+                calculo+=presionado;
+                num="";
+                break;
+            case "=":
+                calculo+=num;
+                num=""+eval(calculo);
+                casilla.setAttribute("value",num);
+                calculo="";
+                resuelto=true;
+                break;
+        }
+    }
+</script>
+{% endblock %}

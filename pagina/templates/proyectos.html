@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<ul class="eleccion">
+    <li><a href="{% url 'app_blogh:calculadora' %}" id="primer">CALCULADORA</a></li>
+    <li><a href="{% url 'app_blogh:conversor' %}">CONVERSOR</a></li>
+    <li><a href="{% url 'app_blogh:broma' %}">JOKE</a></li>
+    <li><a href="{% url 'app_blogh:cronometro' %}" id="ultimo">CRONOMETRO</a></li>
+</ul>
+{% endblock %}

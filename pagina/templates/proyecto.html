@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<script src="{% static 'js/gravity.js' %}"></script>
+<ul class="eleccion">
+    <li><a href="{% url 'app_blogh:calculadora' %}" id="primer">CALCULADORA</a></li>
+    <li><a href="{% url 'app_blogh:conversor' %}">CONVERSOR</a></li>
+    <li><a href="{% url 'app_blogh:broma' %}">JOKE</a></li>
+    <li><a href="{% url 'app_blogh:cronometro' %}" id="ultimo">CRONOMETRO</a></li>
+</ul>
+{% endblock %}
+{% block scripts %}

@@ -1,0 +1,9 @@
+{% for comentario in comentarios %}
+<div class="coment_column_section">
+    <h3>{{comentario.nick}} -- {{comentario.fecha}}</h3>
+    <div class="main_column_section_content">
+        <p>{{comentario.contenido}}</p>
+    </div>
+</div>
+
+{% endfor %}

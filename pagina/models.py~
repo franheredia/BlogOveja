@@ -1,0 +1,25 @@
+# -*- coding: utf-8 -*-
+from django.db import models
+from django.contrib.auth.models import User
+
+# Create your models here.
+
+class post(models.Model):
+    class Meta:
+        ordering=['-fecha']
+        
+    titulo = models.CharField("Título", max_length=100)
+    autor = models.ForeignKey(User)
+    fecha = models.DateTimeField("Fecha", auto_now_add=True)
+    contenido = models.TextField("Contenido")
+    tag =  models.ManyToManyField("Categoria")
+    
+    def __str__(self):
+        return self.titulo
+
+    
+class categoria(models.Model):
+    nombre = models.CharField("Titulo de la Categoria", max_length=50)
+
+    def __str__(self):
+        return self.nombre

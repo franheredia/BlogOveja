@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="bloqueC">
+    <h2>Divisa Original:</h2><select id="moneda1" onchange="converse()">
+    <option value= 8.9487>Pesos Argentinos</option>
+    <option value= 603.255>Pesos Chilenos</option>
+    <option value= 26.61>Pesos Uruguayos</option>
+    <option value= 1>Dolares</option>
+    <option value= 0.8972>Euros</option>
+    </select><input type="text" id="convertir" value="" onchange="converse()"/>
+    <h2>Divisa Deseada:</h2><select id="moneda2" onchange="converse()">
+    <option value= 8.9487>Pesos Argentinos</option>
+    <option value= 603.255>Pesos Chilenos</option>
+    <option value= 26.61>Pesos Uruguayos</option>
+    <option value= 1>Dolares</option>
+    <option value= 0.8972>Euros</option>
+    </select><input type="text" id="resultado" value="" disabled=true/>
+    <br><br>
+    <input type="button" value="Convertir!" onclick="converse()" class="buttonD"/>
+</div>
+{% endblock %}
+
+
+
+{% block scripts %}
+<script>
+    var adolares;
+    var afinal;
+    var e1 = document.getElementById("moneda1");
+    var e2 = document.getElementById("moneda2");
+    var e3 = document.getElementById("convertir");
+
+    function converse(){
+        var divisa1 = e1.options[e1.selectedIndex].value;
+        var divisa2 = e2.options[e2.selectedIndex].value;
+        var casilla = e3.value;
+        adolares = casilla/divisa1;
+        afinal = adolares*divisa2;
+        document.getElementById("resultado").setAttribute("value", afinal);
+    }
+</script>
+{% endblock %}

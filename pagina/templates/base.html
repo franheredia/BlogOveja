@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="es">
+    <meta charset="UTF-8"/>
+    <head>
+        <title>Blog Franco</title>
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="topBar"></div>
+        <h1 class="titulo">Franco Heredia</h1><img class="topimg" src="{% static 'img/topimg.png' %}"/>
+        <ul class="topMenu">
+            <li><a href="{% url 'app_blogh:home' %}">Inicio</a></li>
+            <li><a href="{% url 'app_blogh:contacto' %}">Contacto</a></li>
+            <li><a href="{% url 'app_blogh:proyectos' %}">Proyectos</a></li>
+            <li><a href="{% url 'app_blogh:curriculum' %}">Curriculum</a></li>
+        </ul>
+
+        {% block content %}
+        {% endblock %}
+
+        {% block scripts %}
+
+        {% endblock %}
+
+    </body>
+</html>

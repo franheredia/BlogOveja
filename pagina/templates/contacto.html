@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="bloqueC">
+    <h1>Contactame!</h1>
+    <h3>Completando este formulario estas mandandome un correo electronico, te respondere a tu email cuanto antes pero ten en cuenta que tengo demasiados mensajes porque soy muy bueno... Gracias!</h3>
+    <table border="0" style="margin: 0 auto;">
+        <form class="formulario" method="POST">{% csrf_token %}
+            <tr>
+                <td>Nombre:</td>
+                <td><input class="campo1" name="nombre" type="text"/></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+
+                <td><input class="campo2" name="email" type="text" /></td>
+            </tr>
+            <tr>
+                <td>Comentario:</td>
+                <td><textarea rows="3" name="comentarios">Escriba aquí sus comentarios</textarea></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td Align= Right><button name="enviar">Enviar</button></td>
+            </tr>
+        </form>
+    </table>
+</div>
+{% endblock %}
